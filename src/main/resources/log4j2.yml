@@ -1,0 +1,50 @@
+Configuration:
+  status: warn
+  name: YAMLConfigTest
+  Properties:
+    property:
+      name: filename
+      value: logdebug/logging.log
+#  thresholdFilter:
+#    level: debug
+
+  Appenders:
+    Console:
+      name: STDOUT
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "[%p] [%d{yyyy-MM-dd HH:mm:ss} %c{1}::%l] - \r\n %.-3000msg%n"
+      Filters:
+        ThresholdFilter:
+          level: info
+
+    File:
+      name: File
+      fileName: ${filename}
+      append: false
+      PatternLayout:
+        Pattern: "[%p] [%d{dd/MM/yyyy HH:mm:ss}[%t] %c{1}:%l] - \r\n %.-3000msg%n"
+#      Filters:
+#        ThresholdFilter:
+#          level: error
+
+  Loggers:
+    Logger:
+      - name: com.pt.qa
+        additivity: false
+#        ThreadContextMapFilter:
+#          KeyValuePair:
+#            key: test
+#            value: 123
+        AppenderRef:
+          ref: STDOUT
+
+      - name: com.pt.qa
+        additivity: false
+        AppenderRef:
+          ref: File
+    Root:
+      level: debug
+      AppenderRef:
+        - ref: STDOUT
+        - ref: File
