@@ -3,6 +3,8 @@ package com.sasha.utils.ui;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -10,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class LocalDriverManager {
+    private static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> mobileDriver = new ThreadLocal<>();
 
     public static synchronized void setMobileDriver(WebDriver driver) {
@@ -18,7 +21,10 @@ public class LocalDriverManager {
 
     public static synchronized WebDriver getMobileDriver() {
         if (mobileDriver.get() == null) {
+            log.debug("[LDM]::Initializing mobile driver");
             setMobileDriver(getMobileDriver("Android"));
+        } else {
+            log.debug("[LDM]::Mobile driver already initialized");
         }
         return mobileDriver.get();
     }
@@ -38,6 +44,7 @@ public class LocalDriverManager {
                 dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
                 dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
                 dc.setCapability(MobileCapabilityType.APP, "/some/path/to/app.ipa");
+                log.debug("[LDM]::iOS platform capabilities");
                 return new IOSDriver(localAppiumUrl, dc);
 
             default:
@@ -45,6 +52,7 @@ public class LocalDriverManager {
                 dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
                 dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
                 dc.setCapability(MobileCapabilityType.APP, "/home/aleks/Projects/mobiletest/src/main/resources/apps/spinner.apk");
+                log.debug("[LDM]::iOS platform capabilities");
                 return new AndroidDriver(localAppiumUrl, dc);
         }
     }
