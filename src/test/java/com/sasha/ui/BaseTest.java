@@ -9,6 +9,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public abstract class BaseTest {
+    BaseTest(String appName) {
+        LocalDriverManager.setAppName(appName);
+    }
     protected static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
@@ -18,7 +21,7 @@ public abstract class BaseTest {
         ((AndroidDriver) driver.get()).unlockDevice();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public synchronized void closeDriver() {
         try {
             driver.get().quit();
