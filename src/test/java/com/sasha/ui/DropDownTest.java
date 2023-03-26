@@ -1,16 +1,17 @@
 package com.sasha.ui;
 
 import com.sasha.ui.pages.DropDownAppPage;
+import com.sasha.utils.annotations.AppName;
+import com.sasha.utils.ui.LocalDriverManager;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@AppName(appName = "spinner")
 public class DropDownTest extends BaseTest {
-    DropDownTest() {
-        super("spinner");
-    }
 
-    @Test(groups = "all_ui")
+    @Test(groups = {"all_ui", "dropdown"})
     public void verifyDropDownItemTest() {
         DropDownAppPage dropDownAppPage = new DropDownAppPage();
         String expectedDropDownText = "CYAN";

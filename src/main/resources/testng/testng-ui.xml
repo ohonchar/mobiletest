@@ -2,6 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="UI Test Suites">
+    <listeners>
+        <listener class-name="com.sasha.utils.testng.TestNGListener"/>
+    </listeners>
     <test name="UI Tests">
         <packages>
             <package name="com.sasha.ui.*"/>
