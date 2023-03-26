@@ -9,9 +9,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public abstract class BaseTest {
-    BaseTest(String appName) {
-        LocalDriverManager.setAppName(appName);
-    }
     protected static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 

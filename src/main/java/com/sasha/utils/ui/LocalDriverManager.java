@@ -5,6 +5,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -12,10 +13,12 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 public class LocalDriverManager {
     private static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> mobileDriver = new ThreadLocal<>();
     private static final ThreadLocal<String> applicationName = new ThreadLocal<>();
+    private static final ThreadLocal<DesiredCapabilities> dc = new ThreadLocal<>();
 
     public static synchronized void setAppName(String appName) {
         applicationName.set(appName);
@@ -44,24 +47,29 @@ public class LocalDriverManager {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        DesiredCapabilities dc = new DesiredCapabilities();
+
 
         switch (osType) {
             case "iOS":
-                dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-                dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                dc.setCapability(MobileCapabilityType.APP, "/some/path/to/app.ipa");
+                setCapabilities("iOS", "XCUITest", resourcesDirectory);
                 log.debug("[LDM]::iOS platform capabilities");
-                return new IOSDriver(localAppiumUrl, dc);
+                return new IOSDriver(localAppiumUrl, dc.get());
 
             default:
             case "Android":
-                dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-                dc.setCapability(MobileCapabilityType.APP, String.format("%s/%s.apk",resourcesDirectory, applicationName.get()));
+                setCapabilities("Android", "UiAutomator2", resourcesDirectory);
                 log.debug("[LDM]::iOS platform capabilities");
-                return new AndroidDriver(localAppiumUrl, dc);
+                return new AndroidDriver(localAppiumUrl, dc.get());
         }
+    }
+
+    private static synchronized void setCapabilities(String platformName, String automationName, String resourcesDirectory) {
+        String fileExtension = (platformName.equals("Android")) ? "apk" : "ipa";
+        DesiredCapabilities tempDc = new DesiredCapabilities();
+        tempDc.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+        tempDc.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+        tempDc.setCapability(MobileCapabilityType.APP, String.format("%s/%s.%s", resourcesDirectory, applicationName.get(), fileExtension));
+        dc.set(tempDc);
     }
 
 }
