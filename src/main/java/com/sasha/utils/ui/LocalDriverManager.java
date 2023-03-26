@@ -8,12 +8,18 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class LocalDriverManager {
     private static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> mobileDriver = new ThreadLocal<>();
+    private static final ThreadLocal<String> applicationName = new ThreadLocal<>();
+
+    public static synchronized void setAppName(String appName) {
+        applicationName.set(appName);
+    }
 
     public static synchronized void setMobileDriver(WebDriver driver) {
         mobileDriver.set(driver);
@@ -30,6 +36,7 @@ public class LocalDriverManager {
     }
 
     private static WebDriver getMobileDriver(String osType) {
+        String resourcesDirectory = new File("src/main/resources/apps").getAbsolutePath();
         URL localAppiumUrl;
         try {
             //TODO for the remote running, url should have some factory as well
@@ -51,7 +58,7 @@ public class LocalDriverManager {
             case "Android":
                 dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
                 dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-                dc.setCapability(MobileCapabilityType.APP, "/home/aleks/Projects/mobiletest/src/main/resources/apps/spinner.apk");
+                dc.setCapability(MobileCapabilityType.APP, String.format("%s/%s.apk",resourcesDirectory, applicationName.get()));
                 log.debug("[LDM]::iOS platform capabilities");
                 return new AndroidDriver(localAppiumUrl, dc);
         }

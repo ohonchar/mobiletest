@@ -6,7 +6,11 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DropDownTest extends BaseTest {
-    @Test(groups = "dropdown")
+    DropDownTest() {
+        super("spinner");
+    }
+
+    @Test(groups = "all_ui")
     public void verifyDropDownItemTest() {
         DropDownAppPage dropDownAppPage = new DropDownAppPage();
         String expectedDropDownText = "CYAN";
