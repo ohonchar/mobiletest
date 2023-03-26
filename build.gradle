@@ -20,6 +20,15 @@ dependencies {
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
 }
 
-test {
-    useTestNG()
+task localRunUi(type: Test) {
+    useTestNG() {
+        def groups = System.getProperty('groups', 'all_ui')      // specify with "-Dgroups=", by default 'all_ui'
+        systemProperty "groups", groups
+
+        options {
+            suites 'src/main/resources/testng/testng-ui.xml'
+            includeGroups groups
+
+        }
+    }
 }

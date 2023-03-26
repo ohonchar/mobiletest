@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="UI Test Suites">
+    <test name="UI Tests">
+        <packages>
+            <package name="com.sasha.ui.*"/>
+        </packages>
+    </test>
+</suite>

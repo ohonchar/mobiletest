@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-public class BaseTest {
+public abstract class BaseTest {
     protected static Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
