@@ -30,8 +30,7 @@ public abstract class BasePage extends UiHelpers {
     protected Alert isAlertPresent() {
         Alert alert = null;
         try {
-            alert = new WebDriverWait(LocalDriverManager.getMobileDriver(), Duration.ofSeconds(5))
-                    .until(ExpectedConditions.alertIsPresent());
+            alert = waitUntilAlertIsPresent(3);
             log.info("[ALERT]::Alert is present!!! Returning Alert instance");
         } catch (TimeoutException e) {
             log.info("[ALERT]::Alert is absent");

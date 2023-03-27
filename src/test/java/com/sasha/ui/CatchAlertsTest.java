@@ -2,6 +2,7 @@ package com.sasha.ui;
 
 import com.sasha.ui.pages.PopUpPage;
 import com.sasha.utils.annotations.AppName;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,5 +40,10 @@ public class CatchAlertsTest extends BaseTest {
                 .getTextFromHelloWorldView();
         assertThat(actualText).as("").isEqualTo("Hello, World!");
         log.info("[TEST]::Catch unexpected popup when it is absent");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterTest() {
+        popUpPage.restartAndroidApp();
     }
 }
