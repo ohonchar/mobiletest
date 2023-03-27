@@ -2,8 +2,6 @@ package com.sasha.ui;
 
 import com.sasha.ui.pages.DropDownAppPage;
 import com.sasha.utils.annotations.AppName;
-import com.sasha.utils.ui.LocalDriverManager;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

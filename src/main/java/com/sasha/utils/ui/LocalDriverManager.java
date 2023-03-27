@@ -5,7 +5,6 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -15,7 +14,7 @@ import java.net.URL;
 
 
 public class LocalDriverManager {
-    private static Logger log = LogManager.getRootLogger();
+    private static final Logger log = LogManager.getRootLogger();
     private static final ThreadLocal<WebDriver> mobileDriver = new ThreadLocal<>();
     private static final ThreadLocal<String> applicationName = new ThreadLocal<>();
     private static final ThreadLocal<DesiredCapabilities> dc = new ThreadLocal<>();

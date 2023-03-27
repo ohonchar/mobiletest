@@ -3,7 +3,6 @@ package com.sasha.ui.pages;
 import com.sasha.ui.BasePage;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class DropDownAppPage extends BasePage {
     public DropDownAppPage() {
@@ -15,7 +14,7 @@ public class DropDownAppPage extends BasePage {
     @AndroidFindBy(xpath = spinnerLocator)
     private WebElement dropDown;
 
-    @FindBy(xpath = spinnerLocator + extendedTextLocator)
+    @AndroidFindBy(xpath = spinnerLocator + extendedTextLocator)
     private WebElement dropDownText;
 
     public DropDownAppPage clickOnDropDownMenu() {
