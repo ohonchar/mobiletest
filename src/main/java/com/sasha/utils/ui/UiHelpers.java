@@ -1,6 +1,7 @@
 package com.sasha.utils.ui;
 
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,5 +24,15 @@ public class UiHelpers {
     public WebElement findElement(By element, int defaultTimeout) {
         return new WebDriverWait(driver, Duration.ofSeconds(defaultTimeout))
                 .until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
+
+    public Alert waitUntilAlertIsPresent() {
+        return new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.alertIsPresent());
+    }
+
+    public <T> T goBack(T type) {
+        driver.navigate().back();
+        return type;
     }
 }
