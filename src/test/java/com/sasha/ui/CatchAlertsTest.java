@@ -23,7 +23,7 @@ public class CatchAlertsTest extends BaseTest {
                 .chooseHelloWorldItem()
                 .getTextFromHelloWorldView();
         assertThat(actualText).as("").isEqualTo("Hello, World!");
-
+        log.info("[TEST]::Catch unexpected popup when it is present");
     }
 
     @Test(groups = {"all_ui", "popup"})
@@ -38,6 +38,6 @@ public class CatchAlertsTest extends BaseTest {
                 .chooseHelloWorldItem()
                 .getTextFromHelloWorldView();
         assertThat(actualText).as("").isEqualTo("Hello, World!");
-        log.info("[TEST]::Verify popup menu contains Share item and it is clickable");
+        log.info("[TEST]::Catch unexpected popup when it is absent");
     }
 }

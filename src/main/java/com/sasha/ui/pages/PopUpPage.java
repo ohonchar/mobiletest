@@ -51,20 +51,24 @@ public class PopUpPage extends BasePage {
             popUpAlertTitleThree.click();
             goBack(type);
         }
+        log.info("[STEP]::Catch popup alert on List Dialog");
         return this;
     }
 
     public PopUpPage chooseActivityItem() {
         activityItem.click();
+        log.info("[STEP]::Choose Activity Item");
         return this;
     }
 
     public PopUpPage chooseHelloWorldItem() {
         helloWorldItem.click();
+        log.info("[STEP]::Choose Hello World Item");
         return this;
     }
 
     public String getTextFromHelloWorldView() {
+        log.info("[STEP]::Retrieve text from display view");
         return helloWorldView.getText();
     }
 }
