@@ -39,12 +39,12 @@ public class UiHelpers {
     }
 
     public void restartAndroidApp() {
-        ((AndroidDriver) driver).terminateApp("io.appium.android.apis");
-        ((AndroidDriver) driver).activateApp("io.appium.android.apis");
+        ((AndroidDriver) driver).terminateApp(LocalDriverManager.androidBundleId);
+        ((AndroidDriver) driver).activateApp(LocalDriverManager.androidBundleId);
     }
 
     public void restartIosApp() {
-        ((IOSDriver) driver).terminateApp("com.apple.Preferencess");
-        ((IOSDriver) driver).activateApp("com.apple.Preferences");
+        ((IOSDriver) driver).terminateApp(LocalDriverManager.iOSBundleId);
+        ((IOSDriver) driver).activateApp(LocalDriverManager.iOSBundleId);
     }
 }

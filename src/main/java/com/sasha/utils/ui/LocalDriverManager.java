@@ -15,6 +15,8 @@ import java.net.URL;
 
 public class LocalDriverManager {
     private static final Logger log = LogManager.getRootLogger();
+    protected static String androidBundleId = "io.appium.android.apis";
+    protected static String iOSBundleId = "com.apple.Preferences";
     private static final ThreadLocal<WebDriver> mobileDriver = new ThreadLocal<>();
     private static final ThreadLocal<String> applicationName = new ThreadLocal<>();
     private static final ThreadLocal<DesiredCapabilities> dc = new ThreadLocal<>();
