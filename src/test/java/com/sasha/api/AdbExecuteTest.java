@@ -33,12 +33,18 @@ public class AdbExecuteTest extends ApiBaseTest {
         JSONObject androidIds = getAndroidIds(listOfUsbConnectedAndroidDevices);
         log.info("[STEP]::List of android Ids: \n{}", androidIds.toString(4));
 
+        assertThat(nameListOfWifiConnected.size())
+                .as("Amount of wifi connected devices should be more then 0")
+                .isGreaterThan(0);
+
         String deviceToDisconnect = nameListOfWifiConnected.get(0);
         disconnectDevice(deviceToDisconnect);
         log.info("[STEP]::Disconnected device name: {}", deviceToDisconnect);
 
         Map<String, JSONObject> mapWiFiConnectedDevicesAfterDisconnect = retrieveDevicesByParameter("-v 'usb'");
-        assertThat(mapWiFiConnectedDevicesAfterDisconnect).as("").doesNotContainKey(deviceToDisconnect);
+        assertThat(mapWiFiConnectedDevicesAfterDisconnect)
+                .as("List of connected devices should not contains device: ".concat(deviceToDisconnect))
+                .doesNotContainKey(deviceToDisconnect);
         log.info("[TEST]::Disable one of the available devices that connected through WiFi");
     }
 }
