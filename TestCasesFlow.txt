@@ -1,0 +1,65 @@
+----/\UI suite:/\----
+
+Case #1: Verify drop down item (where dropdown position is flexible)
+Precondition data:
+use app: spinner.apk
+
+1. Init DropDown page
+2. catch and click on Dropdown menu
+3. scroll through item list and find item 'CYAN'
+4. click on item 'CYAN'
+
+-> Expected res: dropdown has name now 'CYAN'
+------------------------------------------------------------------------
+
+case #2: Catch unexpected popup when it is present
+Precondition data:
+use app: ApiDemos-debug.apk
+
+1. Open Main menu
+2. choose App menu item
+3. choose Alert Dialog item menu
+4. choose List Dialog  Item
+5. try to catch Popup alert list dialog
+6. click on system "go back"
+7. choose Activity menu item
+8. choose Hello World item
+9 verify that text from the screen equals to the 'Hello, World!'
+
+-> Expected res: Text from the screen should be equals to 'Hello, World!'
+------------------------------------------------------------------------
+
+case #3: Catch unexpected popup when it is absent
+Precondition data:
+use app: ApiDemos-debug.apk
+
+1. Open Main menu
+2. choose App menu item
+3. choose Alert Dialog item menu
+4. try to catch Popup alert list dialog
+5. click on system "go back"
+6. choose Activity menu item
+7. choose Hello World item
+8 verify that text from the screen equals to the 'Hello, World!'
+
+-> Expected res: Text from the screen should be equals to 'Hello, World!'
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+----/\Api suite:/\----
+
+
+case #1: Catch unexpected popup is present
+Precondition data:
+!!! should be connected at least 2 android devices: where one of them via wifi and another via wifi and usb
+
+1. retrieve devices by greping "adb devices -l | grep -v 'usb'" -> exp.res: show all devices connected via wifi and save to list
+2. retrieve devices by greping "adb devices -l | grep usb" -> exp.res: show all devices connected via usb and save it
+3. retrieve via mobile shell the android_id of usb connected device. Use adb command and put instead %s usb connected device name from step 2:
+    "adb -s %s shell content query --uri content://settings/secure --projection value --where \"name=\\'android_id\\'\""
+4. use adb command to disconnect the first device from step 1:
+    "adb disconnect %s"
+5. repeat step 1
+6. verify that disconnected device name is not present in the list from step 5
+
+-> Expected res: List of connected devices should not contains deleted device
+------------------------------------------------------------------------

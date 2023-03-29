@@ -74,10 +74,12 @@ gradle clean localRunApi --info
 ```
 
 ## Flow
-UI test suite has 2 tests that running on 2 different application files .apk. For the further convenient test design classes
+UI test suite has 3 tests that running on 2 different application files .apk. For the further convenient test design classes
 you just put your app file into `resources/apps` and before test class specify annotation `@AppName` with the name of your app.
 
 API test, not exactly the api that we use to have, like using `RestAssured` lib, this test basically use internal Android Debug Bridge
 api via bash cli.
 
-All test cases steps described in `TestCasesFlow.txt`
+* All test cases steps described in `TestCasesFlow.txt`
+
+* Framework uses slf4j lib, and all logs put in file `logdebug/logging.log`

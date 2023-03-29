@@ -1,6 +1,6 @@
 package com.sasha.ui;
 
-import com.sasha.ui.pages.DropDownAppPage;
+import com.sasha.ui.pages.spinner.DropDownAppPage;
 import com.sasha.utils.annotations.AppName;
 import org.testng.annotations.Test;
 

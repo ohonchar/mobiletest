@@ -1,4 +1,4 @@
-package com.sasha.ui.pages;
+package com.sasha.ui.pages.spinner;
 
 import com.sasha.ui.BasePage;
 import io.appium.java_client.pagefactory.AndroidFindBy;
