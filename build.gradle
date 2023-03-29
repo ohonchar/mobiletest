@@ -36,7 +36,7 @@ task localRunUi(type: Test) {
 
 task localRunApi(type: Test) {
     useTestNG() {
-        def groups = System.getProperty('groups', 'all_api')      // specify with "-Dgroups=", by default 'all_ui'
+        def groups = System.getProperty('groups', 'all_api')      // specify with "-Dgroups=", by default 'all_api'
         systemProperty "groups", groups
 
         options {
