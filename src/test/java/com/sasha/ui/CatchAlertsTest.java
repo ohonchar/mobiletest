@@ -20,7 +20,7 @@ public class CatchAlertsTest extends BaseTest {
                 .chooseAppMenuItem()
                 .chooseAlertDialogsItem()
                 .chooseListDialogItem()
-                .catchPopUpAlertOnListDialog(new ActivityMenuPage());
+                .catchPopUpAlertOnListDialog(new ActivityMenuPage(), 2);
         String actualText = activityMenuPage.goBack(new AppMenuPage())
                 .chooseActivityItem()
                 .chooseHelloWorldItem()
